@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
 
+import SuggestionList from "./SuggestionList";
+
 const AutoComplete = ({ fetchSuggestions }) => {
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -44,10 +46,13 @@ const AutoComplete = ({ fetchSuggestions }) => {
         className="border-black border-solid border-2"
       />
       {(loading || error || suggestions.length > 0) && (
-        <ul>
-          {error && <div>{error}</div>}
-          {loading && <div>Loading...</div>}
-        </ul>
+        <>
+          <ul>
+            {error && <div>{error}</div>}
+            {loading && <div>Loading...</div>}
+          </ul>
+          <SuggestionList suggestions={suggestions} />
+        </>
       )}
     </div>
   );
