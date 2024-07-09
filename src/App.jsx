@@ -13,10 +13,10 @@ function App() {
     return result.recipes;
   };
   return (
-    <>
-      <h1>Welcome bruh</h1>
+    <div className="flex items-center flex-col">
+      <h1 className="text-3xl font-bold mt-52 mb-4">Welcome bruh</h1>
       <AutoComplete fetchSuggestions={fetchSuggestions} />
-    </>
+    </div>
   );
 }
 
