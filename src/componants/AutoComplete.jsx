@@ -10,15 +10,17 @@ const AutoComplete = ({ fetchSuggestions }) => {
   const [error, setError] = useState();
   const [selected, setSelected] = useState(false);
   const suggestionInput = useRef();
-
+  const outerBox = useRef();
   console.log(suggestions);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  const handleBlur = () => {
-    console.log("hjhj");
+  const handleClickOutside = (e) => {
+    if (outerBox.current && !outerBox.current.contains(e.target)) {
+      setSelected(true);
+    }
   };
 
   const onSuggestionClick = (clickedSuggestion) => {
@@ -46,19 +48,24 @@ const AutoComplete = ({ fetchSuggestions }) => {
     } else {
       setSuggestions([]);
     }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [inputValue]);
 
   const debounceGetSuggestions = useCallback(debounce(getSuggestions, 600), []);
 
   return (
-    <div className="">
+    <div ref={outerBox} className="">
       <input
         type="text"
         ref={suggestionInput}
         value={inputValue}
         onChange={handleChange}
         className="border-black border-solid border-2 rounded-md block w-80 p-1 px-2"
-        onBlur={handleBlur}
         placeholder="Enter value"
         onFocus={() => setSelected(false)}
       />

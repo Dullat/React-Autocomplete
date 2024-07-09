@@ -29,7 +29,7 @@ const SuggestionList = ({
   };
   return (
     <React.Fragment>
-      <div className="border-2 border-slate-400">
+      <div className="border-2 border-slate-400 max-h-52 overflow-auto">
         {suggestions.map((suggestion, index) => {
           const currSuggestion = suggestion.name;
           return (
