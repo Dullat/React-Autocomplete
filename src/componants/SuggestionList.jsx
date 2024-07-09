@@ -1,6 +1,12 @@
 import React from "react";
 
-const SuggestionList = ({ suggestions = [] }) => {
+const SuggestionList = ({ suggestions = [], inputValue }) => {
+  const getHighlightedText = (text, highlight) => {
+    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+    parts.map((part, index) => {
+      return;
+    });
+  };
   return (
     <React.Fragment>
       {suggestions.map((suggestion, index) => {
@@ -11,7 +17,7 @@ const SuggestionList = ({ suggestions = [] }) => {
             className="suggestion-item"
             id={`suggestion-${index}`}
           >
-            {currSuggestion}
+            {getHighlightedText(currSuggestion, inputValue)}
           </li>
         );
       })}

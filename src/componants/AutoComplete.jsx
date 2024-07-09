@@ -51,7 +51,7 @@ const AutoComplete = ({ fetchSuggestions }) => {
             {error && <div>{error}</div>}
             {loading && <div>Loading...</div>}
           </ul>
-          <SuggestionList suggestions={suggestions} />
+          <SuggestionList suggestions={suggestions} inputValue={inputValue} />
         </>
       )}
     </div>
